@@ -32,13 +32,32 @@ func allTests(t *testing.T, cache *Cachou) {
 		Field: "hello",
 	}
 
+	// valid put
 	cached, err := cache.Put(valid)
 	assert.Nil(t, err)
 	assert.True(t, cached)
 
+	// invalid put
 	cached, err = cache.Put(invalid)
 	assert.NotNil(t, err)
 	assert.False(t, cached)
+
+	// valid get
+	var cachedStruct testValidStruct
+	gotten, err := cache.Get(&cachedStruct, 420)
+	assert.Nil(t, err)
+	assert.True(t, gotten)
+
+	// invalid get
+	var invalidCachedStruct testInvalidStruct
+	gotten, err = cache.Get(&invalidCachedStruct, 420)
+	assert.NotNil(t, err)
+	assert.False(t, gotten)
+
+	// valid delete
+	deleted, err := cache.Del(testValidStruct{}, 420)
+	assert.Nil(t, err)
+	assert.True(t, deleted)
 }
 
 func TestCachou(t *testing.T) {
