@@ -76,5 +76,18 @@ func main() {
 		ID:	   69,
 		Username: "thomas",
 	}
+	
+	cached, err := saveUser(dsClient, cache, u)
+	if err != nil {
+		panic(err)
+	}
+	log.Info(cached)
+	
+	var u2 User
+	gotten, err := cache.Get(&u2, 69)
+	if err != nil {
+		panic(err)
+	}
+	log.Info(goten, u2)
 }
 ```
