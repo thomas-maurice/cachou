@@ -129,7 +129,7 @@ func (c *Cachou) Put(object interface{}) (bool, error) {
 		if structure == nil {
 			return false, ErrObjectNotCacheable
 		}
-		
+
 		uid, err := c.getUID(structure, object)
 		if err != nil {
 			return false, err
