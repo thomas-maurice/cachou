@@ -27,8 +27,19 @@ type Serializer interface {
 }
 
 type KVStore interface {
-	Put([]byte, []byte, []byte) error
-	Get([]byte, []byte) ([]byte, error)
+    // Arguments in order
+    // * type name, converted to bytes
+    // * uid of the given type
+    // * serialized data
+    Put([]byte, []byte, []byte) error
+    // Arguments in order
+    // * type name, converted to bytes
+    // * uid of the given type
+    // returns the serialized data
+    Get([]byte, []byte) ([]byte, error)
+    // Arguments in order
+    // * type name, converted to bytes
+    // * uid of the given type
 	Del([]byte, []byte) error
 }
 ```
