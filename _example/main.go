@@ -29,7 +29,7 @@ func main() {
 	log.Println("cached: ", cached)
 	// now lets retrieve it from the cache
 
-	var u2 User
+	var u2, u3 User
 	gotten, err := cache.Get(&u2, 69)
 	log.Println("cache hit: ", gotten)
 	log.Println(u2)
@@ -54,8 +54,8 @@ func main() {
 	log.Println("cached: ", cached)
 	// now lets retrieve it from the cache
 
-	gotten, err = cache.Get(&u2, 69)
-	log.Println("cache hit: ", gotten)
-	log.Println(u2)
+	gotten, err = cache.Get(&u3, 69)
+	log.Println("cache hit: ", gotten, err)
+	log.Println(u3)
 
 }
