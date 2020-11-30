@@ -13,7 +13,7 @@ func NewMemoryStorage() *MemoryStorage {
 }
 
 func (s *MemoryStorage) key(objType, objUID []byte) string {
-	return fmt.Sprint("%s#%s", string(objType), string(objUID))
+	return fmt.Sprintf("%s#%s", string(objType), string(objUID))
 }
 
 func (s *MemoryStorage) Put(objType []byte, objUID []byte, objData []byte) error {

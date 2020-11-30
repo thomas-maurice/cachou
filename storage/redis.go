@@ -18,7 +18,7 @@ func NewRedisStorage(opts *redis.Options) *RedisStorage {
 }
 
 func (s *RedisStorage) key(objType, objUID []byte) string {
-	return fmt.Sprint("%s#%s", string(objType), string(objUID))
+	return fmt.Sprintf("%s#%s", string(objType), string(objUID))
 }
 
 func (s *RedisStorage) Put(objType []byte, objUID []byte, objData []byte) error {
