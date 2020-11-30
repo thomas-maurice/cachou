@@ -53,7 +53,6 @@ type Cachou struct {
 func NewCachou(s Serializer, kv KVStore) *Cachou {
 	return &Cachou{
 		structures: make(map[string]*cacheableStruct),
-		objects:    make(map[string][]byte),
 		serializer: s,
 		kvstore:    kv,
 	}
