@@ -24,6 +24,7 @@ func NewBoltStorage(fileName string) (*BoltStorage, error) {
 
 func (s *BoltStorage) Put(objType []byte, objUID []byte, objData []byte) error {
 	return s.db.Update(func(tx *bolt.Tx) error {
+		// TODO (tmaurice): dont call that more than once
 		b, err := tx.CreateBucketIfNotExists(objType)
 		if err != nil {
 			return err
