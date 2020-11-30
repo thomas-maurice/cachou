@@ -17,38 +17,38 @@ import (
 
 	"github.com/thomas-maurice/cachou"
 	"github.com/thomas-maurice/cachou/serializers"
-    "github.com/thomas-maurice/cachou/storage"
-    "cloud.google.com/go/datastore"
+	"github.com/thomas-maurice/cachou/storage"
+	"cloud.google.com/go/datastore"
 )
 
 type User struct {
-	ID       int64  `json:"id" datastore:"id" cachou:"uid"` // this *must be unique*
+	ID	   int64  `json:"id" datastore:"id" cachou:"uid"` // this *must be unique*
 	Username string `json:"username" datastore:"username"`
 }
 
 func saveUser(dsClient *datastore.Client, cache *cachou.Cachou, user User) error {
-    k := datastore.IDKey("user", user.ID, nil)
+	k := datastore.IDKey("user", user.ID, nil)
 	if _, err := s.dsClient.Put(context.Background(), k, user); err != nil {
 		return err
 	}
 
-    
-    _, err := cache.Put(user)
-    return err
+	
+	_, err := cache.Put(user)
+	return err
 }
 
 func getUser(dsClient *datastore.Client, cache *cachou.Cachou, id int64) (*User, error) {
-    var user User
-    found, err := cache.Get(&user, id)
-    if err != nil {
-        return nil, err
-    }
+	var user User
+	found, err := cache.Get(&user, id)
+	if err != nil {
+		return nil, err
+	}
 
-    if found {
-        return &user, nil
-    }
+	if found {
+		return &user, nil
+	}
 
-    u := new(User)
+	u := new(User)
 	k := datastore.IDKey("user", id, nil)
 	if err := dsClient.Get(context.Background(), k, u); err != nil {
 		if err == datastore.ErrNoSuchEntity {
@@ -57,23 +57,23 @@ func getUser(dsClient *datastore.Client, cache *cachou.Cachou, id int64) (*User,
 		return nil, err
 	}
 
-    _, err := cache.Put(user)
-    if err != nil {
-        return nil, err
-    }
+	_, err := cache.Put(user)
+	if err != nil {
+		return nil, err
+	}
 	return u, nil
 }
 
 func main() {
-    dsClient, err := datastore.NewClient(ctx, "some-gcp-project")
+	dsClient, err := datastore.NewClient(ctx, "some-gcp-project")
 	if err != nil {
 		return nil, err
-    }
-    
+	}
+	
 	cache := cachou.NewCachou(serializers.NewJSONSerializer(), storage.NewMemoryStorage())
 
 	u := User{
-		ID:       69,
+		ID:	   69,
 		Username: "thomas",
 	}
 }
