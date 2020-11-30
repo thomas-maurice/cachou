@@ -10,7 +10,7 @@ A `Cache` basically needs two things, a serializer and a storage engine. The `Se
 The point of this library is basically to be a middleware between the process comsuming data, and the source of truth itself. As an example you could have something like that
 
 ## How to make a struct cacheable
-Simply add a `cachou:"uid"` tag toa  string or int field. Like so
+Simply add a `cachou:"uid"` tag to a  string or int field. Like so
 ```go
 type User struct {
 	ID	   int64  `json:"id" datastore:"id" cachou:"uid"` // this *must be unique*
