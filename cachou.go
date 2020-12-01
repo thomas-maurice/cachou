@@ -43,6 +43,7 @@ type cacheableStruct struct {
 	UIDField string
 }
 
+// Cachou is the main cache structure
 type Cachou struct {
 	structures map[string]*cacheableStruct
 	serializer Serializer
@@ -50,6 +51,7 @@ type Cachou struct {
 	objects    map[string][]byte
 }
 
+// NewCachou returns a new Cachou given the provided serializer and key-value storage backend
 func NewCachou(s Serializer, kv KVStore) *Cachou {
 	return &Cachou{
 		structures: make(map[string]*cacheableStruct),
@@ -109,6 +111,7 @@ func (c *Cachou) getUID(structure *cacheableStruct, object interface{}) ([]byte,
 	return c.uidToBytes(obj.FieldByName(structure.UIDField))
 }
 
+// uidToBytes is a helper to convert a struct's UID to bytes for serialization
 func (c *Cachou) uidToBytes(uid reflect.Value) ([]byte, error) {
 	switch uid.Kind() {
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
