@@ -28,6 +28,9 @@ func (s *RedisStorage) Put(objType []byte, objUID []byte, objData []byte) error 
 func (s *RedisStorage) Get(objType []byte, objUID []byte) ([]byte, error) {
 	res := s.client.Get(context.Background(), string(s.key(objType, objUID)))
 	if res.Err() != nil {
+		if res.Err() == redis.Nil {
+			return nil, nil
+		}
 		return nil, res.Err()
 	}
 
@@ -40,4 +43,8 @@ func (s *RedisStorage) Get(objType []byte, objUID []byte) ([]byte, error) {
 
 func (s *RedisStorage) Del(objType []byte, objUID []byte) error {
 	return s.client.Del(context.Background(), string(s.key(objType, objUID))).Err()
+}
+
+func (s *RedisStorage) Close() error {
+	return s.client.Close()
 }

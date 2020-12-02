@@ -34,3 +34,7 @@ func (s *MemoryStorage) Del(objType []byte, objUID []byte) error {
 	delete(s.objects, s.key(objType, objUID))
 	return nil
 }
+
+func (s *MemoryStorage) Close() error {
+	return nil
+}

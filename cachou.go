@@ -37,6 +37,8 @@ type KVStore interface {
 	// * type name, converted to bytes
 	// * uid of the given type
 	Del([]byte, []byte) error
+	// Closes it
+	Close() error
 }
 
 type cacheableStruct struct {

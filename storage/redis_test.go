@@ -17,5 +17,7 @@ func TestRedisStorage(t *testing.T) {
 		Addr: s.Addr(),
 	})
 
+	defer redisStorage.Close()
+
 	genericTest(t, redisStorage)
 }

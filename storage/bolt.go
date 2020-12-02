@@ -59,3 +59,7 @@ func (s *BoltStorage) Del(objType []byte, objUID []byte) error {
 	})
 
 }
+
+func (s *BoltStorage) Close() error {
+	return s.db.Close()
+}

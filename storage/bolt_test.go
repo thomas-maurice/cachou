@@ -15,5 +15,7 @@ func TestBoltStorage(t *testing.T) {
 	boltStorage, err := NewBoltStorage(path.Join(tempDir, "bolt.db"))
 	assert.Nil(t, err)
 
+	defer boltStorage.Close()
+
 	genericTest(t, boltStorage)
 }
