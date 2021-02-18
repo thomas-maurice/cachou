@@ -193,6 +193,10 @@ func (c *Cachou) Get(object interface{}, uid interface{}) (bool, error) {
 				return false, err
 			}
 
+			if data == nil {
+				return false, nil
+			}
+
 			err = c.deserialize(data, object)
 			if err != nil {
 				return false, err

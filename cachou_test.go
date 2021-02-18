@@ -48,6 +48,10 @@ func allTests(t *testing.T, cache *Cachou) {
 	assert.Nil(t, err)
 	assert.True(t, gotten)
 
+	gotten, err = cache.Get(&cachedStruct, 421)
+	assert.Nil(t, err)
+	assert.False(t, gotten)
+
 	// invalid get
 	var invalidCachedStruct testInvalidStruct
 	gotten, err = cache.Get(&invalidCachedStruct, 420)
